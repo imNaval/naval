@@ -1,0 +1,412 @@
+.resume-section {
+  padding: 60px 20px;
+  // background: #fff;
+
+  .section-title {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    position: relative;
+    color: #ffffff;
+
+    &::after {
+      content: "";
+      display: block;
+      width: 50px;
+      height: 3px;
+      background: linear-gradient(90deg, #00d4ff, #0563bb);
+      margin-top: 5px;
+    }
+  }
+
+  .section-description {
+    margin-bottom: 40px;
+    color: #b0b0b0;
+    font-style: italic;
+    line-height: 1.6;
+  }
+
+  .resume-content {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+
+    .resume-column {
+      flex: 1;
+      min-width: 300px;
+    }
+
+    .resume-block {
+      margin-bottom: 40px;
+
+      .resume-block-title {
+        font-size: 20px;
+        font-weight: 600;
+        color: #00d4ff;
+        position: relative;
+        margin-bottom: 20px;
+
+        &::after {
+          content: "";
+          display: block;
+          width: 40px;
+          height: 2px;
+          background: linear-gradient(90deg, #00d4ff, #0563bb);
+          margin-top: 6px;
+        }
+      }
+
+      .vertical-line {
+        position: relative;
+        margin-left: 16px;
+        padding-left: 30px;
+
+        .line-segment {
+          position: absolute;
+          left: -2px;
+          top: 0;
+          width: 2px;
+          background: #00d4ff;
+          transform-origin: top;
+        }
+
+        // prevent overflow or floating lines
+        &::before {
+          content: "";
+          position: absolute;
+          left: -2px;
+          top: 0;
+          bottom: 0;
+          width: 2px;
+          background: transparent;
+        }
+      }
+
+      .resume-block-content {
+        position: relative;
+        padding-left: 20px;
+        margin-bottom: 30px;
+
+        .circle {
+          position: absolute;
+          left: -39px;
+          top: 0px;
+          width: 14px;
+          height: 14px;
+          background-color: #201a40;
+          border: 3px solid #00d4ff;
+          border-radius: 50%;
+        }
+
+        h4 {
+          font-weight: 600;
+          margin-bottom: 5px;
+          color: #ffffff;
+        }
+
+        h5 {
+          font-size: 14px;
+          font-weight: 500;
+          color: #00d4ff;
+          margin-bottom: 8px;
+        }
+
+        p {
+          margin-top: 5px;
+          color: #b0b0b0;
+          line-height: 1.6;
+        }
+
+        ul {
+          margin-top: 8px;
+          padding-left: 18px;
+
+          li {
+            margin-bottom: 6px;
+            list-style: disc;
+            color: #b0b0b0;
+            line-height: 1.5;
+          }
+        }
+
+        .social-links {
+          display: flex;
+          gap: 15px;
+          margin-top: 15px;
+          flex-wrap: wrap;
+
+          .social-link {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            padding: 8px 12px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+
+            &.linkedin {
+              background: linear-gradient(45deg, #0077b5, #00a0dc);
+              color: white;
+
+              &:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 4px 12px rgba(0, 119, 181, 0.3);
+              }
+            }
+
+            &.github {
+              background: linear-gradient(45deg, #333, #24292e);
+              color: white;
+
+              &:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 4px 12px rgba(51, 51, 51, 0.3);
+              }
+            }
+
+            &.leetcode {
+              background: linear-gradient(45deg, #ffa116, #ff8c00);
+              color: white;
+
+              &:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 4px 12px rgba(255, 161, 22, 0.3);
+              }
+            }
+          }
+        }
+
+        .certification-content {
+          display: flex;
+          gap: 20px;
+          align-items: flex-start;
+
+          .cert-info {
+            flex: 1;
+          }
+
+          .cert-image {
+            flex-shrink: 0;
+            width: 120px;
+            height: 80px;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 2px solid #00d4ff;
+            background: #ffffff;
+            transition: all 0.3s ease;
+
+            img {
+              width: 100%;
+              height: 100%;
+              object-fit: cover;
+              transition: transform 0.3s ease;
+              border-radius: 6px;
+
+              &:hover {
+                transform: scale(1.05);
+              }
+            }
+
+            &:hover {
+              border-color: #0563bb;
+              box-shadow: 0 4px 15px rgba(0, 212, 255, 0.2);
+            }
+          }
+        }
+
+        .skills-tags {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 8px;
+          margin-top: 10px;
+
+          .skill-tag {
+            background: linear-gradient(45deg, #00d4ff, #0563bb);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+
+            &.secondary {
+              background: linear-gradient(45deg, #28a745, #20c997);
+            }
+
+            &.soft {
+              background: linear-gradient(45deg, #6f42c1, #e83e8c);
+            }
+
+            &:hover {
+              transform: translateY(-2px);
+              box-shadow: 0 4px 12px rgba(0, 212, 255, 0.3);
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+// Mobile Responsive Styles
+@media (max-width: 768px) {
+  .resume-section {
+    padding: 30px 10px;
+    
+    .section-title {
+      font-size: 20px;
+      text-align: center;
+    }
+    
+    .section-description {
+      text-align: center;
+      margin-bottom: 25px;
+      font-size: 14px;
+    }
+    
+    .resume-content {
+      gap: 25px;
+      
+      .resume-column {
+        min-width: auto;
+        width: 100%;
+      }
+      
+      .resume-block {
+        margin-bottom: 25px;
+        
+        .resume-block-title {
+          font-size: 16px;
+          text-align: center;
+        }
+        
+        .resume-block-content {
+          padding-left: 12px;
+          
+          .circle {
+            left: -32px;
+            width: 10px;
+            height: 10px;
+          }
+          
+          h4 {
+            font-size: 14px;
+          }
+          
+          h5 {
+            font-size: 12px;
+          }
+          
+          p {
+            font-size: 13px;
+          }
+          
+          ul li {
+            font-size: 13px;
+          }
+          
+          .certification-content {
+            flex-direction: column;
+            gap: 12px;
+            align-items: center;
+            text-align: center;
+            
+            .cert-image {
+              width: 80px;
+              height: 60px;
+            }
+          }
+          
+          .social-links {
+            justify-content: center;
+            
+            .social-link {
+              font-size: 10px;
+              padding: 5px 8px;
+            }
+          }
+          
+          .skills-tags {
+            justify-content: center;
+            
+            .skill-tag {
+              font-size: 10px;
+              padding: 4px 8px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .resume-section {
+    padding: 20px 5px;
+    
+    .section-title {
+      font-size: 18px;
+    }
+    
+    .section-description {
+      font-size: 13px;
+      margin-bottom: 20px;
+    }
+    
+    .resume-content {
+      gap: 20px;
+      
+      .resume-block {
+        .resume-block-content {
+          padding-left: 8px;
+          
+          .circle {
+            left: -36px;
+            width: 8px;
+            height: 8px;
+          }
+          
+          h4 {
+            font-size: 13px;
+          }
+          
+          h5 {
+            font-size: 11px;
+          }
+          
+          p {
+            font-size: 12px;
+          }
+          
+          ul li {
+            font-size: 12px;
+          }
+          
+          .cert-image {
+            width: 70px;
+            height: 50px;
+          }
+          
+          .social-link {
+            font-size: 9px;
+            padding: 4px 6px;
+          }
+          
+          .skill-tag {
+            font-size: 9px;
+            padding: 3px 6px;
+          }
+        }
+      }
+    }
+  }
+}
+
+

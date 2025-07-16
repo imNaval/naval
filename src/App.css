@@ -1,0 +1,13 @@
+.app{
+  /* display: flex;
+  flex-direction: row; */
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .app {
+    overflow-x: hidden;
+  }
+}

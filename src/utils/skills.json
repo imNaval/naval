@@ -1,0 +1,24 @@
+{
+    "name": "skills",
+    "version": "1.0.0",
+    "description": "A JSON file containing skills data for a portfolio.",
+    "skills": [
+        { "id": 1, "name": "HTML", "percent": 75 },
+        { "id": 2, "name": "CSS", "percent": 80 },
+        { "id": 3, "name": "Sass", "percent": 60 },
+        { "id": 4, "name": "Tailwind CSS", "percent": 80 },
+
+        { "id": 5, "name": "JavaScript", "percent": 85 },
+        { "id": 6, "name": "TypeScript", "percent": 20 },
+        { "id": 7, "name": "React", "percent": 85 },
+        { "id": 8, "name": "Redux", "percent": 50 },
+        { "id": 9, "name": "Node.js", "percent": 60 },
+        { "id": 10, "name": "Express.js", "percent": 65 },
+        { "id": 11, "name": "MongoDB", "percent": 40 },
+
+        { "id": 12, "name": "Git", "percent": 50 },
+        { "id": 13, "name": "GitHub", "percent": 65 },
+        { "id": 14, "name": "REST APIs", "percent": 70 },
+        { "id": 15, "name": "GraphQL", "percent": 25 }
+    ]
+}

@@ -1,0 +1,195 @@
+.contact{
+    height: 100vh; // Force full height
+    max-width: 1366px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    padding: 0 20px; // Remove all padding
+    margin-top: 0; // Remove negative margin
+    position: relative; // Add positioning
+
+    .textContainer{
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+
+        h1{
+            font-size: 90px;
+            line-height: 88px;
+        }
+
+        .itemContainer{
+            display: flex;
+            flex-direction: column;
+            .item{
+                display: flex;
+                align-items: center;
+                gap: 10px;
+            }
+
+            
+        }
+    }
+
+    .formContainer{
+        flex: 1;
+        position: relative;
+
+        .phoneSvg{
+            stroke: orange;
+            position: absolute;
+            margin: auto;
+            z-index: -1;
+        }
+
+        form{
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+
+            input, textarea{
+                padding: 20px;
+                background-color: transparent;
+                border: 1px solid white;
+                color: white;
+                border-radius: 5px;
+                -webkit-border-radius: 5px;
+                -moz-border-radius: 5px;
+                -ms-border-radius: 5px;
+                -o-border-radius: 5px;
+            }
+
+
+            button{
+                padding: 20px;
+                border: none;
+                background-color: orange;
+                cursor: pointer;
+                font-weight: 500;
+
+            }
+        }
+    }
+}
+
+// Mobile Responsive Styles
+@media (max-width: 768px) {
+  .contact {
+    height: auto;
+    min-height: 100vh;
+    flex-direction: column;
+    gap: 10px;
+    padding: 20px 10px;
+    justify-content: flex-start;
+    
+    .textContainer {
+      text-align: center;
+      align-items: center;
+      gap: 15px;
+      
+      h1 {
+        font-size: 32px;
+        line-height: 1.2;
+        margin-bottom: 0;
+      }
+      
+      .itemContainer {
+        align-items: center;
+        gap: 8px;
+        
+        .item {
+          justify-content: center;
+          font-size: 14px;
+        }
+      }
+    }
+    
+    .formContainer {
+      width: 100%;
+      position: relative;
+      margin-top: 10px;
+      
+      .phoneSvg {
+        position: absolute;
+        top: 10%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 200px;
+        height: 200px;
+        opacity: 0.3;
+        z-index: -1;
+        
+        svg {
+          width: 100%;
+          height: 100%;
+        }
+      }
+      
+      form {
+        gap: 12px;
+        position: relative;
+        z-index: 1;
+        
+        input, textarea {
+          padding: 12px;
+          font-size: 16px; // Prevent zoom on iOS
+        }
+        
+        button {
+          padding: 12px;
+          font-size: 14px;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .contact {
+    padding: 15px 5px;
+    gap: 8px;
+    
+    .textContainer {
+      gap: 10px;
+      
+      h1 {
+        font-size: 24px;
+        margin-bottom: 0;
+      }
+      
+      .itemContainer {
+        gap: 6px;
+        
+        .item {
+          font-size: 13px;
+        }
+      }
+    }
+    
+    .formContainer {
+      margin-top: 8px;
+      
+      .phoneSvg {
+        width: 150px;
+        height: 150px;
+        opacity: 0.2;
+      }
+      
+      form {
+        gap: 10px;
+        
+        input, textarea {
+          padding: 10px;
+          font-size: 14px;
+        }
+        
+        button {
+          padding: 10px;
+          font-size: 13px;
+        }
+      }
+    }
+  }
+}
