@@ -1,6 +1,7 @@
 import "./styles/hero.scss"
 import { useEffect } from "react"
 import { downloadResume } from "../utils/functionality"
+import { CONTACT_EMAIL } from "../utils/constants"
 
 const Hero = () => {
   useEffect(() => {
@@ -30,6 +31,15 @@ const Hero = () => {
     }
   }, []);
 
+  const handleHireMeClick = () => {
+    const email = CONTACT_EMAIL; // Using environment variable
+    const subject = 'Hiring Inquiry - Web Developer Position';
+    const body = 'Hello Naval,\n\nI am interested in discussing a potential collaboration or hiring opportunity with you.\n\nBest regards,';
+    
+    const mailtoLink = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    window.open(mailtoLink);
+  };
+
   return (
     <div className='hero' id="hero">
         <div className="wrapper">
@@ -46,6 +56,7 @@ const Hero = () => {
                             cursor: 'pointer',
                             transition: 'all 0.3s ease'
                         }}
+                        onClick={handleHireMeClick}
                     >
                         HIRE ME
                     </button>

@@ -1,12 +1,55 @@
-# React + Vite
+# Naval Nehra - Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern React portfolio website showcasing my skills and experience as a Frontend Developer.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Responsive design with modern UI/UX
+- Contact form with EmailJS integration
+- Comprehensive form validation
+- Profanity and spam filtering
+- Smooth animations with Framer Motion
+- Mobile-friendly interface
 
-## Expanding the ESLint configuration
+## Environment Variables
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+This project uses environment variables for sensitive configuration. Create a `.env` file in the root directory with the following variables:
+
+### EmailJS Configuration
+Get these values from your [EmailJS dashboard](https://dashboard.emailjs.com/):
+```
+VITE_EMAILJS_PUBLIC_KEY=your_public_key_here
+VITE_EMAILJS_SERVICE_ID=your_service_id_here
+VITE_EMAILJS_TEMPLATE_ID=your_template_id_here
+```
+
+### Contact Information
+```
+VITE_CONTACT_EMAIL=your_contact_email_here
+VITE_RESUME_EMAIL=your_resume_email_here
+```
+
+## Setup
+
+1. Clone the repository
+2. Install dependencies: `npm install`
+3. Copy `.env.example` to `.env` and fill in your credentials
+4. Run the development server: `npm run dev`
+5. Build for production: `npm run build`
+
+## Technologies Used
+
+- React 19
+- Vite
+- EmailJS
+- Framer Motion
+- SCSS
+- JavaScript (ES6+)
+
+## Security Features
+
+- Environment variables for sensitive data
+- Input sanitization and validation
+- XSS protection
+- Spam and profanity filtering
+- Email validation with disposable email detection

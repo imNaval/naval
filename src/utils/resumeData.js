@@ -1,3 +1,5 @@
+import { RESUME_EMAIL } from './constants';
+
 export const resumeData = {
   summary: {
     name: "Naval Nehra",
@@ -6,7 +8,7 @@ export const resumeData = {
     contact: {
       location: "Prayagraj, Uttar Pradesh, India",
       phone: "+91 6350431551",
-      email: "nehranvl2017@gmail.com",
+      email: RESUME_EMAIL, // Using environment variable
       website: "www.learnjavascript.in/",
       linkedin: "linkedin.com/in/naval-nehra",
       github: "github.com/naval-nehra",

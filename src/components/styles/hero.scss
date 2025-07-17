@@ -13,6 +13,7 @@
     .imageContainer {
       height: 100%;
       position: absolute;
+      z-index: 0;
       top: 0;
       right: 0;
     }
@@ -24,6 +25,7 @@
       flex-direction: column;
       justify-content: center;
       gap: 20px;
+      z-index: 100;
 
       h2 {
         font-size: 40px;
@@ -33,6 +35,7 @@
       h1 {
         font-size: 80px;
         // letter-spacing: 2px;
+        z-index: 100;
       }
 
       .buttons {
@@ -55,7 +58,7 @@
           box-shadow: none !important;
           outline: none !important;
           position: relative !important;
-          z-index: 10 !important;
+          z-index: 20 !important;
         }
         #hireMeButton {
           background-color: orange !important;
@@ -84,12 +87,13 @@
     .slidingTextContainer {
       position: absolute;
       font-size: 33vh;
-      bottom: 10px;
+      bottom: -20px;
       white-space: nowrap;
-      color: #ffffff09;
+      color: #ffffff0b;
       width: 90%;
       font-weight: bold;
       animation: slideText 30s infinite alternate;
+      z-index: 10;
     }
   }
 }
@@ -114,6 +118,27 @@
   }
 }
 
+@media (min-width: 900px) {
+  .hero {
+    .wrapper {
+      // padding: 0 50px;
+      .imageContainer {
+        // height: 80%;
+        position: absolute;
+        z-index: 0;
+        top: 0;
+        right: 0;
+
+        img{
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+      }
+    }
+  }
+}
+
 // Mobile Responsive Styles
 @media (max-width: 768px) {
   .hero {
@@ -133,8 +158,8 @@
         justify-content: center;
         
         img {
-          width: 200px;
-          height: 200px;
+          width: 300px;
+          height: 300px;
           object-fit: cover;
           border-radius: 50%;
           border: 4px solid #149ddd;
@@ -204,8 +229,8 @@
         margin-bottom: 15px;
         
         img {
-          width: 150px;
-          height: 150px;
+          width: 250px;
+          height: 250px;
         }
       }
       

@@ -1,6 +1,7 @@
 // src/components/Sidebar.jsx
 import { useState, useEffect } from 'react';
 import './styles/sidebar.scss';
+import { LinkedIn, GitHub, LeetCode, Twitter, Instagram } from '../utils/constants';
 
 const Sidebar = () => {
     const [activeSection, setActiveSection] = useState('hero');
@@ -87,19 +88,19 @@ const Sidebar = () => {
                     </div>
                     <h1>Naval Nehra</h1>
                     <div className="social-links">
-                        <a href="#" className="social-icon">
+                        <a href={LinkedIn} className="social-icon" target="_blank" rel="noopener noreferrer">
                             <i className="bi bi-linkedin"></i>
                         </a>
-                        <a href="#" className="social-icon">
+                        <a href={GitHub} className="social-icon" target="_blank" rel="noopener noreferrer">
                             <i className="bi bi-github"></i>
                         </a>
-                        <a href="#" className="social-icon">
+                        <a href={LeetCode} className="social-icon" target="_blank" rel="noopener noreferrer">
                             <i className="bi bi-code-square"></i>
                         </a>
-                        <a href="#" className="social-icon">
+                        <a href={Twitter} className="social-icon" target="_blank" rel="noopener noreferrer">
                             <i className="bi bi-twitter-x"></i>
                         </a>
-                        <a href="#" className="social-icon">
+                        <a href={Instagram} className="social-icon" target="_blank" rel="noopener noreferrer">
                             <i className="bi bi-instagram"></i>
                         </a>
                     </div>

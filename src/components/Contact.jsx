@@ -1,8 +1,10 @@
 import { useRef, useState } from "react"
 import "./styles/contact.scss"
-import { motion } from "framer-motion"
+import { motion } from "framer-motion" // Used in JSX components below
 import emailjs from '@emailjs/browser';
 import { emailjs_PUBLIC_KEY, emailjs_SERVICE_ID, emailjs_TEMPLATE_ID } from "../utils/constants";
+import { checkProfanity, isSpam } from "../utils/profanityFilter";
+import { validateEmailRealTime, validateEmail } from "../utils/emailValidator";
 
 const variants = {
     initial: {
@@ -19,23 +21,185 @@ const variants = {
     }
 }
 
+// Name validation (alphabets only)
+const validateName = (name) => {
+    const nameRegex = /^[a-zA-Z\s]+$/;
+    if (!nameRegex.test(name)) {
+        return { isValid: false, message: "Name can only contain alphabets and spaces" };
+    }
+    if (name.trim().length < 2) {
+        return { isValid: false, message: "Name must be at least 2 characters long" };
+    }
+    return { isValid: true, message: "" };
+};
+
+// Input sanitization - different levels for different fields
+const sanitizeInput = (input, fieldType = 'general') => {
+    if (!input) return input;
+    
+    let sanitized = input.trim();
+    
+    // Basic XSS protection for all fields
+    sanitized = sanitized
+        .replace(/[<>]/g, '') // Remove potential HTML tags
+        .replace(/javascript:/gi, '') // Remove javascript: protocol
+        .replace(/on\w+=/gi, ''); // Remove event handlers
+    
+    // Apply field-specific sanitization
+    switch (fieldType) {
+        case 'name':
+            // Only allow alphabets and spaces for name
+            sanitized = sanitized.replace(/[^a-zA-Z\s]/g, '');
+            break;
+        case 'email':
+            // Allow email characters
+            sanitized = sanitized.replace(/[^a-zA-Z0-9@._-]/g, '');
+            break;
+        case 'message':
+            // For message field: Allow ALL characters including spaces, line breaks, punctuation
+            // Only remove the most dangerous HTML/script content
+            // This ensures maximum flexibility for user input
+            sanitized = sanitized
+                .replace(/<script[^>]*>.*?<\/script>/gi, '') // Remove script tags
+                .replace(/<iframe[^>]*>.*?<\/iframe>/gi, '') // Remove iframe tags
+                .replace(/javascript:/gi, '') // Remove javascript protocol
+                .replace(/on\w+=/gi, '') // Remove event handlers
+                .replace(/</g, '&lt;') // Escape <
+                .replace(/>/g, '&gt;'); // Escape >
+            // Note: We intentionally preserve ALL spaces, line breaks (\n), and other characters
+            break;
+        default:
+            // General sanitization - preserve spaces and most characters
+            sanitized = sanitized
+                .replace(/&(?!(amp|lt|gt|quot|apos|#x27|#x2F);)/g, '&amp;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#x27;');
+    }
+    
+    return sanitized;
+};
+
 const Contact = () => {
     const ref = useRef(null)
     const formRef = useRef(null)
     const [error, setError] = useState(false)
     const [success, setSuccess] = useState(false)
+    const [validationErrors, setValidationErrors] = useState({})
+    const [formData, setFormData] = useState({
+        name: '',
+        email: '',
+        message: ''
+    })
 
-    const sendEmail = (e) => {
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        
+        // Special handling for message field to ensure spaces and line breaks are preserved
+        let sanitizedValue;
+        if (name === 'message') {
+            // For message field, use minimal sanitization to preserve all user input
+            sanitizedValue = value
+                .replace(/<script[^>]*>.*?<\/script>/gi, '') // Remove script tags
+                .replace(/<iframe[^>]*>.*?<\/iframe>/gi, '') // Remove iframe tags
+                .replace(/javascript:/gi, '') // Remove javascript protocol
+                .replace(/on\w+=/gi, '') // Remove event handlers
+                .replace(/</g, '&lt;') // Escape <
+                .replace(/>/g, '&gt;'); // Escape >
+        } else {
+            // For other fields, use the regular sanitization
+            sanitizedValue = sanitizeInput(value, name);
+        }
+        
+        setFormData(prev => ({
+            ...prev,
+            [name]: sanitizedValue
+        }));
+        
+        // Real-time validation for email
+        if (name === 'email' && value) {
+            const emailValidation = validateEmailRealTime(value);
+            if (!emailValidation.isValid) {
+                setValidationErrors(prev => ({
+                    ...prev,
+                    email: emailValidation.message
+                }));
+            } else {
+                setValidationErrors(prev => ({
+                    ...prev,
+                    email: ''
+                }));
+            }
+        } else {
+            // Clear validation error when user starts typing
+            if (validationErrors[name]) {
+                setValidationErrors(prev => ({
+                    ...prev,
+                    [name]: ''
+                }));
+            }
+        }
+    };
+
+    const validateForm = async () => {
+        const errors = {};
+        
+        // Validate name
+        const nameValidation = validateName(formData.name);
+        if (!nameValidation.isValid) {
+            errors.name = nameValidation.message;
+        }
+        
+        // Validate email with comprehensive checks
+        const emailValidation = await validateEmail(formData.email, {
+            checkDisposable: true,
+            checkMX: false // Set to true for production if you want domain validation
+        });
+        if (!emailValidation.isValid) {
+            errors.email = emailValidation.message;
+        }
+        
+        // Validate message
+        if (!formData.message.trim()) {
+            errors.message = "Message is required";
+        } else if (formData.message.length < 10) {
+            errors.message = "Message must be at least 10 characters long";
+        } else {
+            // Check for profanity and spam
+            const profanityCheck = checkProfanity(formData.message);
+            const spamCheck = isSpam(formData.message);
+            
+            if (profanityCheck.hasProfanity) {
+                errors.message = profanityCheck.message;
+            } else if (spamCheck) {
+                errors.message = "Message appears to be spam";
+            }
+        }
+        
+        setValidationErrors(errors);
+        return Object.keys(errors).length === 0;
+    };
+
+    const sendEmail = async (e) => {
         e.preventDefault();
+        
+        // Validate form before sending
+        if (!validateForm()) {
+            setError(true);
+            setTimeout(() => setError(false), 3000);
+            return;
+        }
     
-        emailjs.sendForm(emailjs_SERVICE_ID, emailjs_TEMPLATE_ID, formRef.current, emailjs_PUBLIC_KEY)
-          .then(() => {
-              setSuccess(true)
-          }, (error) => {
-              console.log(error.text);
-              setError(false)
-          });
-      };
+        try {
+            await emailjs.sendForm(emailjs_SERVICE_ID, emailjs_TEMPLATE_ID, formRef.current, emailjs_PUBLIC_KEY);
+            setSuccess(true);
+            setFormData({ name: '', email: '', message: '' });
+            setTimeout(() => setSuccess(false), 3000);
+        } catch (error) {
+            console.log(error.text);
+            setError(true);
+            setTimeout(() => setError(false), 3000);
+        }
+    };
 
   return (
     <motion.div className='contact' id="contact"
@@ -98,13 +262,48 @@ const Contact = () => {
                 whileInView={{opacity:1, y: 0}} 
                 transition={{ delay:3.5, duration: 1.5, ease: "easeOut"}}
             >
-                <input type="text" required placeholder="Name" name="name" />
-                <input type="email" required placeholder="Email" name="email" />
-                <textarea rows={8} placeholder="Message" name="message" />
-                <button>Send</button>
+                <div className="input-group">
+                    <input 
+                        type="text" 
+                        required 
+                        placeholder="Name" 
+                        name="name"
+                        value={formData.name}
+                        onChange={handleInputChange}
+                        className={validationErrors.name ? 'error' : ''}
+                    />
+                    {validationErrors.name && <span className="error-message">{validationErrors.name}</span>}
+                </div>
+                
+                <div className="input-group">
+                    <input 
+                        type="email" 
+                        required 
+                        placeholder="Email" 
+                        name="email"
+                        value={formData.email}
+                        onChange={handleInputChange}
+                        className={validationErrors.email ? 'error' : ''}
+                    />
+                    {validationErrors.email && <span className="error-message">{validationErrors.email}</span>}
+                </div>
+                
+                <div className="input-group">
+                    <textarea 
+                        rows={8} 
+                        placeholder="Message" 
+                        name="message"
+                        value={formData.message}
+                        onChange={handleInputChange}
+                        className={validationErrors.message ? 'error' : ''}
+                    />
+                    {validationErrors.message && <span className="error-message">{validationErrors.message}</span>}
+                </div>
+                
+                <button type="submit">Send</button>
 
-                {error && "Error"}
-                {success && "Success"}
+                {error && <div className="alert error">Please fix the errors above</div>}
+                {success && <div className="alert success">Message sent successfully!</div>}
 
             </motion.form>
         </motion.div>
