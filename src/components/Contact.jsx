@@ -1,5 +1,5 @@
 import { useRef, useState } from "react"
-import "./styles/contact.scss"
+import "../styles/contact.scss"
 import { motion } from "framer-motion" // Used in JSX components below
 import emailjs from '@emailjs/browser';
 import { emailjs_PUBLIC_KEY, emailjs_SERVICE_ID, emailjs_TEMPLATE_ID } from "../utils/constants";

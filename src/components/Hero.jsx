@@ -1,4 +1,4 @@
-import "./styles/hero.scss"
+import "../styles/hero.scss"
 import { useEffect } from "react"
 import { downloadResume } from "../utils/functionality"
 import { CONTACT_EMAIL } from "../utils/constants"

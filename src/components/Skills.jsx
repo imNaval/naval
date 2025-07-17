@@ -1,7 +1,7 @@
 import { motion, useAnimation } from "framer-motion";
 import { useEffect, useRef } from "react";
 import { useInView } from "framer-motion";
-import "./styles/skills.scss"; // Adjust the path as necessary
+import "../styles/skills.scss"; // Adjust the path as necessary
 import skillsData from "../utils/skills.json";
 
 const Skills = () => {

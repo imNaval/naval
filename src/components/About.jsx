@@ -1,7 +1,7 @@
 // src/components/About.jsx
 import React from 'react';
 import { motion, useInView } from 'framer-motion';
-import './styles/about.scss';
+import '../styles/about.scss';
 
 const About = () => {
   const ref = React.useRef(null);

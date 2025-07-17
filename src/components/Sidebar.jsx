@@ -1,6 +1,6 @@
 // src/components/Sidebar.jsx
 import { useState, useEffect } from 'react';
-import './styles/sidebar.scss';
+import '../styles/sidebar.scss';
 import { LinkedIn, GitHub, LeetCode, Twitter, Instagram } from '../utils/constants';
 
 const Sidebar = () => {

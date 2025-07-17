@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion, useInView } from 'framer-motion';
-import './styles/resume.scss'; // Import the styles for the Resume component
+import '../styles/resume.scss'; // Import the styles for the Resume component
 import { resumeData } from '../utils/resumeData';
 
 const Resume = () => {

@@ -1,5 +1,5 @@
 import { useRef, useState, useEffect } from "react";
-import "./styles/projects.scss";
+import "../styles/projects.scss";
 import { projects } from "../utils/projects";
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 
@@ -60,7 +60,7 @@ const Project = ({ item }) => {
         <div className="textContainer">
           <h2>{item.title}</h2>
           <p>{item.desc}</p>
-          <button>See Live</button>
+          <button onClick={() => window.open(item.links.live, '_blank')}>See Live</button>
         </div>
       </motion.div>
     </section>
