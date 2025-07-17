@@ -1,6 +1,9 @@
 import { RESUME_EMAIL } from './constants';
 import reactCertificate from '../assets/certificates/react-certificate.webp';
 
+// Placeholder image for missing certificates
+const placeholderCertificate = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjE1MCIgdmlld0JveD0iMCAwIDIwMCAxNTAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIyMDAiIGhlaWdodD0iMTUwIiBmaWxsPSIjRjNGNEY2Ii8+CjxwYXRoIGQ9Ik0xMDAgNzVDMTA4LjI4NCA3NSAxMTUgNjguMjg0MyAxMTUgNjBDMTE1IDUxLjcxNTcgMTA4LjI4NCA0NSAxMDAgNDVDOTEuNzE1NyA0NSA4NSA1MS43MTU3IDg1IDYwQzg1IDY4LjI4NDMgOTEuNzE1NyA3NSAxMDAgNzVaIiBmaWxsPSIjOUI5QkEwIi8+CjxwYXRoIGQ9Ik0xMDAgODVDMTA4LjI4NCA4NSAxMTUgNzguMjg0MyAxMTUgNzBDMTE1IDYxLjcxNTcgMTA4LjI4NCA1NSAxMDAgNTVDOTEuNzE1NyA1NSA4NSA2MS43MTU3IDg1IDcwQzg1IDc4LjI4NDMgOTEuNzE1NyA4NSAxMDAgODVaIiBmaWxsPSIjOUI5QkEwIi8+Cjx0ZXh0IHg9IjEwMCIgeT0iMTEwIiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTIiIGZpbGw9IiM2QjZCN0MiIHRleHQtYW5jaG9yPSJtaWRkbGUiPkltYWdlIG5vdCBhdmFpbGFibGU8L3RleHQ+Cjwvc3ZnPgo=';
+
 export const resumeData = {
   summary: {
     name: "Naval Nehra",
@@ -95,14 +98,14 @@ export const resumeData = {
       name: "JavaScript Algorithms and Data Structures",
       issuer: "freeCodeCamp",
       year: "2022",
-      image: "/images/certificates/freecodecamp-js.png"
+      image: placeholderCertificate
     },
     {
       id: 3,
       name: "System Design Fundamentals",
       issuer: "Namaste System Design",
       year: "2024",
-      image: "/images/certificates/namaste-system-design.png"
+      image: placeholderCertificate
     }
   ]
 }; 
