@@ -5,15 +5,10 @@ const Footer = () => {
   return (
     <footer className="footer">
       <div className="footer-content">
-        <p className="copyright">© 2024 Naval. All rights reserved.</p>
-        <a 
-          href="https://naval-portfolio.vercel.app" 
-          className="website-link"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          naval-portfolio.vercel.app
-        </a>
+        <p className="copyright">© 2025 Naval. All rights reserved.</p>
+        <p className="final-note">
+          Thanks for visiting! Let's build something amazing together.
+        </p>
       </div>
     </footer>
   );
