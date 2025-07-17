@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react';
 import '../styles/sidebar.scss';
 import { LinkedIn, GitHub, LeetCode, Twitter, Instagram } from '../utils/constants';
+import profileImage from '../assets/profile.jpg';
 
 const Sidebar = () => {
     const [activeSection, setActiveSection] = useState('hero');
@@ -84,7 +85,7 @@ const Sidebar = () => {
             <aside className={`sidebar ${isMobileMenuOpen ? 'mobile-open' : ''}`}>
                 <div className="profile">
                     <div className="profile-image">
-                        <img src="./profile.jpg" alt="Naval Nehra" />
+                        <img src={profileImage} alt="Naval Nehra" />
                     </div>
                     <h1>Naval Nehra</h1>
                     <div className="social-links">

@@ -2,6 +2,8 @@ import "../styles/hero.scss"
 import { useEffect } from "react"
 import { downloadResume } from "../utils/functionality"
 import { CONTACT_EMAIL } from "../utils/constants"
+import heroImage from "../assets/hero.png"
+import scrollImage from "../assets/scroll.png"
 
 const Hero = () => {
   useEffect(() => {
@@ -44,7 +46,7 @@ const Hero = () => {
     <div className='hero' id="hero">
         <div className="wrapper">
             <div className="imageContainer">
-                <img src="./hero.png" alt="hero" />
+                <img src={heroImage} alt="hero" />
             </div>
             <div className="introContainer">
                 <h2>Naval Nehra</h2>
@@ -71,7 +73,7 @@ const Hero = () => {
                         GET CV
                     </button>
                 </div>
-                <img src="./scroll.png" alt="scroll" />
+                <img src={scrollImage} alt="scroll" />
             </div>
 
             <div className="slidingTextContainer">

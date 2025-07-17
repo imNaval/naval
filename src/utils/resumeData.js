@@ -1,4 +1,5 @@
 import { RESUME_EMAIL } from './constants';
+import reactCertificate from '../assets/certificates/react-certificate.webp';
 
 export const resumeData = {
   summary: {
@@ -87,7 +88,7 @@ export const resumeData = {
       name: "React Developer Certification",
       issuer: "Namaste Dev",
       year: "2023",
-      image: "./public/react-certificate.webp"
+      image: reactCertificate
     },
     {
       id: 2,
