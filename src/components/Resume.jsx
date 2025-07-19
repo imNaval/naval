@@ -1,15 +1,15 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import '../styles/resume.scss'; // Import the styles for the Resume component
 import { resumeData } from '../utils/resumeData';
 
 const Resume = () => {
   // Separate refs for each subsection
-  const summaryRef = React.useRef(null);
-  const experienceRef = React.useRef(null);
-  const educationRef = React.useRef(null);
-  const certificationsRef = React.useRef(null);
-  const skillsRef = React.useRef(null);
+  const summaryRef = useRef(null);
+  const experienceRef = useRef(null);
+  const educationRef = useRef(null);
+  const certificationsRef = useRef(null);
+  const skillsRef = useRef(null);
 
   // Separate viewport detection for each section
   const summaryInView = useInView(summaryRef, { margin: "-50px" });

@@ -1,10 +1,10 @@
 // src/components/About.jsx
-import React from 'react';
+import React, { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import '../styles/about.scss';
 
 const About = () => {
-  const ref = React.useRef(null);
+  const ref = useRef(null);
   const isInView = useInView(ref, { margin: "-100px" });
 
   return (
