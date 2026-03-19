@@ -32,4 +32,4 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           port: 21
           local-dir: ./dist/
-          server-dir: /public_html/Naval
+          server-dir: /public_html/Naval/
