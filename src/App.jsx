@@ -11,97 +11,43 @@ import Projects from './components/Projects'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
 import Post from './components/Posts/Post'
+import NavigationLoading from './components/NavigationLoading'
 
-// Loading component for navigation
-const NavigationLoading = () => {
-  const [progress, setProgress] = useState(0);
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setProgress(prev => {
-        if (prev >= 100) {
-          clearInterval(interval);
-          return 100;
-        }
-        return prev + Math.random() * 15;
-      });
-    }, 200);
-
-    return () => clearInterval(interval);
-  }, []);
-
-  return (
-    <div className="posts-loading-container">
-      <div className="loading-content">
-        <div className="loading-animation">
-          <div className="man-container">
-            <div className="man">
-              <div className="head"></div>
-              <div className="body"></div>
-              <div className="arms">
-                <div className="arm left"></div>
-                <div className="arm right"></div>
-              </div>
-              <div className="legs">
-                <div className="leg left"></div>
-                <div className="leg right"></div>
-              </div>
-            </div>
-          </div>
-          
-          <div className="data-collection">
-            <div className="data-points">
-              {[...Array(20)].map((_, i) => (
-                <div 
-                  key={i} 
-                  className={`data-point ${progress > i * 5 ? 'collected' : ''}`}
-                  style={{ 
-                    left: `${Math.random() * 80 + 10}%`,
-                    top: `${Math.random() * 60 + 20}%`,
-                    animationDelay: `${i * 0.1}s`
-                  }}
-                ></div>
-              ))}
-            </div>
-          </div>
-
-          <div className="progress-container">
-            <div className="progress-bar">
-              <div 
-                className="progress-fill" 
-                style={{ width: `${progress}%` }}
-              ></div>
-            </div>
-            <div className="progress-text">
-              Loading content... {Math.round(progress)}%
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-};
-
-// App content component
 const AppContent = () => {
   const mainContentRef = useRef(null);
   const [isLoading, setIsLoading] = useState(false);
   const location = useLocation();
 
+  const [progress, setProgress] = useState(0);
+
   useEffect(() => {
-    // Show loading when navigating from /post to other routes
+    // Simulate loading with progress bar
     if (location.pathname !== '/post') {
       setIsLoading(true);
-      const timer = setTimeout(() => {
-        setIsLoading(false);
-      }, 2000); // Show loading for 2 seconds
+      const interval = setInterval(() => {
+        setProgress(prev => {
+          if (prev >= 100) {
+            clearInterval(interval);
+            setTimeout(() => setIsLoading(false), 500); // Small delay for smooth transition
+            return 100;
+          }
+          return Math.min(100, prev + Math.random() * 20); // Random increment for realistic loading
+        });
+      }, 200);
 
-      return () => clearTimeout(timer);
+      return () => clearInterval(interval);
+    }
+    else{
+      setProgress(50)
     }
   }, [location.pathname]);
 
   if (isLoading) {
-    return <NavigationLoading />;
+    return <NavigationLoading
+      progress={progress}
+      info="Loading content..."
+    />;
   }
 
   return (

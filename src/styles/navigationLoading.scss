@@ -1,0 +1,190 @@
+.posts-loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  position: relative;
+  overflow: hidden;
+  margin-left: 300px;
+  width: calc(100vw - 300px);
+  transition: margin-left 0.3s ease;
+}
+
+.loading-content {
+  text-align: center;
+  color: white;
+  z-index: 2;
+}
+
+.loading-animation {
+  position: relative;
+  width: 400px;
+  height: 300px;
+  margin: 0 auto;
+}
+
+// Progress Bar & Wrapper
+.progress-container {
+  position: absolute;
+  bottom: 120px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 300px;
+  text-align: center;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #ffd700, #ffed4e);
+  border-radius: 4px;
+  transition: width 0.3s ease;
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+}
+
+.progress-text {
+  font-size: 14px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+// --- SLEEK MODERN CSS RUNNER --- //
+
+.modern-runner-wrapper {
+  position: absolute;
+  bottom: 25px; // Just above the bar
+  transform: translateX(-50%); // Centered on the progress point
+  transition: left 0.3s ease-out;
+  z-index: 3;
+}
+
+.modern-runner {
+  position: relative;
+  width: 24px;
+  height: 40px;
+  transform: rotate(10deg); // Leans forward to run
+  animation: body-bounce 0.4s infinite alternate ease-in-out;
+}
+
+.r-head {
+  position: absolute;
+  top: -12px;
+  left: 5px;
+  width: 14px;
+  height: 14px;
+  background: #fff;
+  border-radius: 50%;
+}
+
+.r-torso {
+  position: absolute;
+  top: 2px;
+  left: 8px;
+  width: 8px;
+  height: 18px;
+  background: #fff;
+  border-radius: 4px;
+}
+
+.r-arm {
+  position: absolute;
+  top: 3px;
+  width: 6px;
+  height: 18px;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 3px;
+  transform-origin: top center; // Pivots at the shoulder
+  
+  &.r-arm-left {
+    left: 4px;
+    animation: limb-swing 0.6s infinite alternate ease-in-out;
+  }
+  
+  &.r-arm-right {
+    left: 14px;
+    background: #fff;
+    animation: limb-swing-reverse 0.6s infinite alternate ease-in-out;
+  }
+}
+
+.r-leg {
+  position: absolute;
+  top: 18px;
+  width: 6px;
+  height: 20px;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 3px;
+  transform-origin: top center; // Pivots at the hip
+  
+  &.r-leg-left {
+    left: 6px;
+    animation: limb-swing-reverse 0.6s infinite alternate ease-in-out;
+  }
+  
+  &.r-leg-right {
+    left: 12px;
+    background: #fff;
+    animation: limb-swing 0.6s infinite alternate ease-in-out;
+  }
+}
+
+// Keyframes for Running
+@keyframes body-bounce {
+  0% { transform: translateY(0) rotate(10deg); }
+  100% { transform: translateY(-4px) rotate(12deg); }
+}
+
+@keyframes limb-swing {
+  0% { transform: rotate(-45deg); }
+  100% { transform: rotate(45deg); }
+}
+
+@keyframes limb-swing-reverse {
+  0% { transform: rotate(45deg); }
+  100% { transform: rotate(-45deg); }
+}
+
+// --- DATA POINTS --- //
+.data-collection {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%; z-index: 1;
+}
+
+.data-points {
+  position: relative; width: 100%; height: 100%;
+}
+
+.data-point {
+  position: absolute;
+  width: 8px; height: 8px;
+  background: #ffd700; border-radius: 50%;
+  opacity: 0.7; animation: dataFloat 3s ease-in-out infinite;
+  
+  &.collected { animation: dataCollected 0.5s ease-out forwards; }
+}
+
+@keyframes dataFloat {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-10px) scale(1.1); }
+}
+
+@keyframes dataCollected {
+  0% { transform: scale(1); opacity: 0.7; }
+  50% { transform: scale(1.5); opacity: 1; }
+  100% { transform: scale(0); opacity: 0; }
+}
+
+@media (max-width: 768px) {
+  .posts-loading-container { margin-left: 0; width: 100vw; }
+  .loading-animation { width: 300px; height: 250px; }
+  .progress-container { width: 250px; }
+}

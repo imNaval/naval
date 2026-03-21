@@ -7,6 +7,9 @@
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   position: relative;
   overflow: hidden;
+  margin-left: 300px; // Matches sidebar width
+  width: calc(100vw - 300px);
+  transition: margin-left 0.3s ease;
 }
 
 .loading-content {
@@ -221,8 +224,12 @@
 // Posts Content Styles
 .posts-container {
   min-height: 100vh;
+  height: 100vh;
+  overflow-y: auto;
   background: #f8f9fa;
-  padding: 2rem;
+  margin-left: 300px; // Matches sidebar width
+  width: calc(100vw - 300px);
+  transition: margin-left 0.3s ease;
 }
 
 .posts-fallback {
@@ -235,8 +242,9 @@
 }
 
 .posts-content {
-  max-width: 1200px;
+  // max-width: 1200px;
   margin: 0 auto;
+  padding: 2rem 2rem 2rem 0;
 }
 
 .posts-header {
@@ -260,7 +268,7 @@
 
 .posts-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 2rem;
   margin-bottom: 3rem;
 }
@@ -366,7 +374,17 @@
 // Responsive Design
 @media (max-width: 768px) {
   .posts-container {
-    padding: 1rem;
+    margin-left: 0;
+    width: 100vw;
+  }
+  
+  .posts-loading-container {
+    margin-left: 0;
+    width: 100vw;
+  }
+  
+  .posts-content {
+    padding: 1rem 1rem 1rem 0;
   }
   
   .posts-header h1 {
@@ -389,5 +407,11 @@
   
   .progress-container {
     width: 250px;
+  }
+}
+
+@media (max-width: 480px) {
+  .posts-content {
+    padding: 0.5rem;
   }
 } 

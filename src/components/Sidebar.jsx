@@ -16,20 +16,16 @@ const Sidebar = () => {
         if (path === '/post') {
             navigate('/post');
         } else {
-            // Check if we're already on the main page
             if (location.pathname === '/') {
-                // Already on main page, just scroll to section
                 scrollToSection(sectionId);
-                // Immediately set the active section
                 setActiveSection(sectionId);
             } else {
-                // Coming from /post, navigate and then scroll after delay
                 navigate('/');
                 if (sectionId) {
                     setTimeout(() => {
                         scrollToSection(sectionId);
                         setActiveSection(sectionId);
-                    }, 100); // Reduced delay
+                    }, 2100); 
                 }
             }
         }
@@ -41,77 +37,79 @@ const Sidebar = () => {
         const element = document.getElementById(sectionId);
         if (element) {
             const mainContent = document.querySelector('.main-content');
-            const elementTop = element.offsetTop;
-            mainContent.scrollTo({
-                top: elementTop,
-                behavior: 'smooth'
-            });
-        }
-    };
-
-    // Improved scroll detection function
-    const handleScroll = () => {
-        const mainContent = document.querySelector('.main-content');
-        if (!mainContent) return;
-
-        const sections = ['hero', 'about', 'resume', 'portfolio', 'contact'];
-        const scrollTop = mainContent.scrollTop;
-        const viewportHeight = mainContent.clientHeight;
-
-        // Find which section is currently in view
-        let currentSection = 'hero';
-        
-        for (let i = sections.length - 1; i >= 0; i--) {
-            const section = document.getElementById(sections[i]);
-            if (section) {
-                const sectionTop = section.offsetTop;
-                
-                // Check if section is in viewport (more precise detection)
-                if (scrollTop >= sectionTop - viewportHeight * 0.3) {
-                    currentSection = sections[i];
-                    break;
-                }
+            if (mainContent) {
+                const elementTop = element.offsetTop;
+                mainContent.scrollTo({
+                    top: elementTop,
+                    behavior: 'smooth'
+                });
             }
         }
-        
-        setActiveSection(currentSection);
     };
 
-    // Update active section based on route and scroll position
+    // The Bulletproof Scroll Tracker
     useEffect(() => {
         if (location.pathname === '/post') {
             setActiveSection('posts');
-        } else {
-            // Set up scroll listener for home page
+            return;
+        }
+
+        let ticking = false;
+
+        const handleGlobalScroll = (e) => {
+            const target = e.target;
+            
+            // Only react if the element scrolling is our main content area
+            if (target && target.classList && target.classList.contains('main-content')) {
+                if (!ticking) {
+                    requestAnimationFrame(() => {
+                        const sections = ['hero', 'about', 'skills', 'resume', 'portfolio', 'contact'];
+                        
+                        // 1. Edge Case: Did we hit the absolute bottom of the scroll container?
+                        const isAtBottom = Math.ceil(target.scrollTop + target.clientHeight) >= target.scrollHeight - 50;
+                        
+                        if (isAtBottom) {
+                            setActiveSection('contact'); // Force last section
+                        } else {
+                            // 2. Standard Viewport Math
+                            let current = sections[0];
+                            for (const id of sections) {
+                                const element = document.getElementById(id);
+                                if (element) {
+                                    const rect = element.getBoundingClientRect();
+                                    // If the top of the section enters the top 40% of the viewport window
+                                    if (rect.top <= window.innerHeight * 0.4) {
+                                        current = id;
+                                    }
+                                }
+                            }
+                            setActiveSection(current);
+                        }
+                        ticking = false;
+                    });
+                    ticking = true;
+                }
+            }
+        };
+
+        // The Magic Trick: 'true' enables the Capture Phase. 
+        // This catches scroll events on .main-content even if it renders late!
+        window.addEventListener('scroll', handleGlobalScroll, true);
+
+        // Run an initial check after the 2-second loading screen finishes
+        const initialCheckTimer = setTimeout(() => {
             const mainContent = document.querySelector('.main-content');
             if (mainContent) {
-                // Initial check for current section
-                handleScroll();
-                
-                // Add scroll event listener with throttling
-                let ticking = false;
-                const throttledHandleScroll = () => {
-                    if (!ticking) {
-                        requestAnimationFrame(() => {
-                            handleScroll();
-                            ticking = false;
-                        });
-                        ticking = true;
-                    }
-                };
-                
-                mainContent.addEventListener('scroll', throttledHandleScroll);
-                
-                // Cleanup function
-                return () => {
-                    mainContent.removeEventListener('scroll', throttledHandleScroll);
-                };
+                // Manually trigger the check once it exists
+                handleGlobalScroll({ target: mainContent }); 
             }
-        }
-    }, [location.pathname]);
+        }, 2100);
 
-    // Remove the additional effect that was causing timing issues
-    // The scroll detection will handle itself properly now
+        return () => {
+            window.removeEventListener('scroll', handleGlobalScroll, true);
+            clearTimeout(initialCheckTimer);
+        };
+    }, [location.pathname]);
 
     // Close mobile menu when clicking outside
     useEffect(() => {
@@ -187,6 +185,18 @@ const Sidebar = () => {
                                 }}
                             >
                                 <i className="bi bi-person"></i> <span>About</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a 
+                                href="#skills" 
+                                className={`nav-link ${activeSection === 'skills' ? 'active' : ''}`}
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    handleNavigation('/', 'skills');
+                                }}
+                            >
+                                <i className="bi bi-person"></i> <span>Skills</span>
                             </a>
                         </li>
                         <li>
