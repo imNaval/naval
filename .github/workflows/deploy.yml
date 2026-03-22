@@ -21,6 +21,15 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+# NAYA STEP: Build se pehle .env file create karna
+      - name: Create .env file
+        run: |
+          echo "VITE_EMAILJS_PUBLIC_KEY=${{ secrets.VITE_EMAILJS_PUBLIC_KEY }}" >> .env
+          echo "VITE_EMAILJS_SERVICE_ID=${{ secrets.VITE_EMAILJS_SERVICE_ID }}" >> .env
+          echo "VITE_EMAILJS_TEMPLATE_ID=${{ secrets.VITE_EMAILJS_TEMPLATE_ID }}" >> .env
+          echo "VITE_CONTACT_EMAIL=${{ secrets.VITE_CONTACT_EMAIL }}" >> .env
+          echo "VITE_RESUME_EMAIL=${{ secrets.VITE_RESUME_EMAIL }}" >> .env
+
       - name: Build project
         run: npm run build # Vite hai toh npm run build hi use hota hai
 
