@@ -20,7 +20,7 @@ const About = () => {
       <div className="about-content">
         <div className="about-info">
           <div className="role-badge">
-            <motion.span 
+            <motion.span
               className="badge javascript"
               initial={{ y: -150, opacity: 0 }}
               animate={isInView ? { y: 0, opacity: 1 } : { y: -150, opacity: 0 }}
@@ -28,7 +28,7 @@ const About = () => {
             >
               JavaScript
             </motion.span>
-            <motion.span 
+            <motion.span
               className="badge react"
               initial={{ y: -150, opacity: 0 }}
               animate={isInView ? { y: 0, opacity: 1 } : { y: -150, opacity: 0 }}
@@ -36,21 +36,29 @@ const About = () => {
             >
               React
             </motion.span>
-            <motion.span 
-              className="badge node"
+            <motion.span
+              className="badge nextJs"
               initial={{ y: -150, opacity: 0 }}
               animate={isInView ? { y: 0, opacity: 1 } : { y: -150, opacity: 0 }}
               transition={{ duration: 0.8, ease: "easeInOut", delay: 0.3 }}
             >
-              Node.js
+              Next.js
             </motion.span>
-            <motion.span 
-              className="badge express"
+            <motion.span
+              className="badge typescript"
               initial={{ y: -150, opacity: 0 }}
               animate={isInView ? { y: 0, opacity: 1 } : { y: -150, opacity: 0 }}
               transition={{ duration: 0.8, ease: "easeInOut", delay: 0.4 }}
             >
-              Express.js
+              TypeScript
+            </motion.span>
+            <motion.span
+              className="badge node"
+              initial={{ y: -150, opacity: 0 }}
+              animate={isInView ? { y: 0, opacity: 1 } : { y: -150, opacity: 0 }}
+              transition={{ duration: 0.8, ease: "easeInOut", delay: 0.1 }}
+            >
+              Node & Express
             </motion.span>
           </div>
 
@@ -62,7 +70,7 @@ const About = () => {
             I create seamless user experiences from concept to deployment.
           </p>
 
-          <motion.div 
+          <motion.div
             className="details-grid"
             initial={{ scaleX: 0, opacity: 0 }}
             animate={isInView ? { scaleX: 1, opacity: 1 } : { scaleX: 0, opacity: 0 }}

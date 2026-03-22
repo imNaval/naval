@@ -79,13 +79,18 @@
           overflow: hidden;
 
           &::before {
-            content: '';
+            content: "";
             position: absolute;
             top: 0;
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            background: linear-gradient(
+              90deg,
+              transparent,
+              rgba(255, 255, 255, 0.2),
+              transparent
+            );
             transition: left 0.5s;
           }
 
@@ -105,21 +110,33 @@
             box-shadow: 0 4px 15px rgba(247, 223, 30, 0.3);
           }
 
-          &.node {
+          &.typescript {
             background: linear-gradient(45deg, #68a063, #4caf50);
             color: white;
             box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
           }
 
-          &.express {
+          &.nextJs {
             background: linear-gradient(45deg, #afb5af, #667366);
             color: white;
             box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
           }
 
+          &.node {
+            background: linear-gradient(45deg, #98a063, #a2dc4b);
+            color: white;
+            box-shadow: 0 4px 15px rgba(137, 175, 76, 0.3);
+          }
+
+          &.express {
+            background: linear-gradient(45deg, #84888a, #7b7486);
+            color: white;
+            box-shadow: 0 4px 15px rgba(157, 76, 175, 0.3);
+          }
+
           &:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
           }
         }
       }
@@ -157,7 +174,7 @@
           overflow: hidden;
 
           &::before {
-            content: '';
+            content: "";
             position: absolute;
             top: 0;
             left: 0;
@@ -170,7 +187,7 @@
           &:hover {
             transform: translateX(5px);
             background: rgba(255, 255, 255, 0.08);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
 
             &::before {
               width: 8px;
@@ -271,13 +288,18 @@
           overflow: hidden;
 
           &::before {
-            content: '';
+            content: "";
             position: absolute;
             top: 0;
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            background: linear-gradient(
+              90deg,
+              transparent,
+              rgba(255, 255, 255, 0.2),
+              transparent
+            );
             transition: left 0.5s;
           }
 
@@ -339,12 +361,12 @@
 @media (max-width: 768px) {
   .about {
     padding: 30px 10px;
-    
+
     .section-title {
       h2 {
         font-size: 24px;
       }
-      
+
       p {
         font-size: 16px;
       }
@@ -355,14 +377,14 @@
         h3 {
           font-size: 20px;
         }
-        
+
         .about-tagline {
           font-size: 16px;
         }
 
         .role-badge {
           justify-content: center;
-          
+
           .badge {
             font-size: 12px;
             padding: 6px 12px;
@@ -376,7 +398,7 @@
 
           ul {
             min-width: auto;
-            
+
             li {
               font-size: 14px;
               padding: 8px 0;
@@ -386,7 +408,7 @@
 
         .cta-section {
           justify-content: center;
-          
+
           .cta-button {
             padding: 10px 20px;
             font-size: 13px;
@@ -400,12 +422,12 @@
 @media (max-width: 480px) {
   .about {
     padding: 20px 5px;
-    
+
     .section-title {
       h2 {
         font-size: 20px;
       }
-      
+
       p {
         font-size: 14px;
       }
@@ -416,7 +438,7 @@
         h3 {
           font-size: 18px;
         }
-        
+
         .about-tagline {
           font-size: 14px;
         }
@@ -430,7 +452,7 @@
 
         .details-grid {
           padding: 0 5px;
-          
+
           ul li {
             font-size: 13px;
             padding: 6px 0;
