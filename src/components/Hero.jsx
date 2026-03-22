@@ -34,12 +34,17 @@ const Hero = () => {
   }, []);
 
   const handleHireMeClick = () => {
-    const email = CONTACT_EMAIL; // Using environment variable
+    const email = CONTACT_EMAIL || 'nehranvl2017@gmail.com'; // fallback if env var missing
     const subject = 'Hiring Inquiry - Web Developer Position';
     const body = 'Hello Naval,\n\nI am interested in discussing a potential collaboration or hiring opportunity with you.\n\nBest regards,';
-    
+
     const mailtoLink = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    window.open(mailtoLink);
+
+    console.log(window)
+    if (typeof window !== 'undefined') {
+      // Most desktop browsers reliably handle mailto via location href
+      window.location.href = mailtoLink;
+    }
   };
 
   return (
@@ -50,7 +55,7 @@ const Hero = () => {
             </div>
             <div className="introContainer">
                 <h2>Naval Nehra</h2>
-                <h1>Web Developer | React Developer</h1>
+                <h1>Web Developer | React | Next</h1>
                 <div className="buttons">
                     <button 
                         id="hireMeButton"
@@ -77,7 +82,7 @@ const Hero = () => {
             </div>
 
             <div className="slidingTextContainer">
-                JavaScript | React | Node | Web Development
+                JavaScript | TypeScript | React | Next.js | Node | Web Development
             </div>
         </div>
     </div>

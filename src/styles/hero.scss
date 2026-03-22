@@ -89,12 +89,13 @@
       font-size: 33vh;
       bottom: -20px;
       white-space: nowrap;
-      color: #ffffff0b;
+      color: #ffffff22;
       width: 90%;
       font-weight: bold;
       animation: slideText 30s infinite alternate;
       z-index: 10;
-    }
+      -webkit-animation: slideText 30s infinite alternate;
+}
   }
 }
 
@@ -114,8 +115,12 @@
     transform: translateX(0);
   }
   100% {
-    transform: translateX(-300%);
-  }
+    transform: translateX(-700%);
+    -webkit-transform: translateX(-700%);
+    -moz-transform: translateX(-700%);
+    -ms-transform: translateX(-700%);
+    -o-transform: translateX(-700%);
+}
 }
 
 @media (min-width: 900px) {

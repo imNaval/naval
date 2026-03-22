@@ -1,4 +1,4 @@
-import { useRef, useState } from "react"
+import { useRef, useState, useEffect } from "react"
 import "../styles/contact.scss"
 import { motion } from "framer-motion" // Used in JSX components below
 import emailjs from '@emailjs/browser';
@@ -84,12 +84,23 @@ const Contact = () => {
     const formRef = useRef(null)
     const [error, setError] = useState(false)
     const [success, setSuccess] = useState(false)
+    const [loading, setLoading] = useState(false)
     const [validationErrors, setValidationErrors] = useState({})
     const [formData, setFormData] = useState({
         name: '',
         email: '',
         message: ''
     })
+
+    // Initialize EmailJS on component mount
+    useEffect(() => {
+        if (emailjs_PUBLIC_KEY) {
+            emailjs.init(emailjs_PUBLIC_KEY);
+            console.log("EmailJS initialized successfully");
+        } else {
+            console.error("EmailJS Public Key is not defined. Check your .env file.");
+        }
+    }, []);
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -181,23 +192,35 @@ const Contact = () => {
 
     const sendEmail = async (e) => {
         e.preventDefault();
+        setLoading(true);
+        setError(false);
+        setSuccess(false);
         
         // Validate form before sending
-        if (!validateForm()) {
+        if (!await validateForm()) {
             setError(true);
+            setLoading(false);
             setTimeout(() => setError(false), 3000);
             return;
         }
     
         try {
-            await emailjs.sendForm(emailjs_SERVICE_ID, emailjs_TEMPLATE_ID, formRef.current, emailjs_PUBLIC_KEY);
+            console.log("Attempting to send email with:");
+
+            // Use sendForm without the public key (already initialized)
+            const response = await emailjs.sendForm(emailjs_SERVICE_ID, emailjs_TEMPLATE_ID, formRef.current);
+            console.log("Email sent successfully:", response);
+            
             setSuccess(true);
             setFormData({ name: '', email: '', message: '' });
             setTimeout(() => setSuccess(false), 3000);
         } catch (error) {
-            console.log(error.text);
+            console.error("Error sending email:", error);
+
             setError(true);
             setTimeout(() => setError(false), 3000);
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -218,7 +241,7 @@ const Contact = () => {
             </div>
             <div className="item">
                 <h2>Address : </h2>
-                <span>udaipur, Rajasthan</span>
+                <span>Jaipur, Rajasthan</span>
             </div>
             <div className="item">
                 <h2>Phone</h2>
@@ -300,7 +323,7 @@ const Contact = () => {
                     {validationErrors.message && <span className="error-message">{validationErrors.message}</span>}
                 </div>
                 
-                <button type="submit">Send</button>
+                <button type="submit" disabled={loading}>{loading ? 'Sending...' : 'Send'}</button>
 
                 {error && <div className="alert error">Please fix the errors above</div>}
                 {success && <div className="alert success">Message sent successfully!</div>}
